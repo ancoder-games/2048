@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bo2fs1uqqemtl"]
+
+[ext_resource type="Shader" uid="uid://bn38a4sqwuxor" path="res://assets/shaders/crt.gdshader" id="1_8p82q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_77k5f"]
+shader = ExtResource("1_8p82q")
+shader_parameter/curvature = 0.01200000057
+shader_parameter/scanlines = 0.150000007125
+shader_parameter/scanline_size = 4.000000095
+shader_parameter/brightness = 1.20000003325
+shader_parameter/rgb_mask = false
+shader_parameter/mask_strength = 0.150000007125
+
+[node name="PostProcessing" type="Node" unique_id=2064727996]
+
+[node name="CRT" type="CanvasLayer" parent="." unique_id=2054967978]
+
+[node name="ColorRect" type="ColorRect" parent="CRT" unique_id=1884034104]
+material = SubResource("ShaderMaterial_77k5f")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

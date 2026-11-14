@@ -1,6 +1,35 @@
 [gd_scene format=3 uid="uid://bab4p2kybglsp"]
 
 [ext_resource type="Script" uid="uid://cem07vlayo1jy" path="res://src/core/main/main.gd" id="1_6t2ow"]
+[ext_resource type="PackedScene" uid="uid://bo2fs1uqqemtl" path="res://src/gameplay/post_processing/post_processing.tscn" id="2_eijcj"]
 
-[node name="Main" type="Node" unique_id=1437717578]
+[sub_resource type="Environment" id="Environment_eijcj"]
+background_mode = 3
+tonemap_mode = 2
+tonemap_exposure = 0.6
+tonemap_white = 1.5
+glow_enabled = true
+glow_intensity = 0.2
+glow_bloom = 0.5
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 0.9
+
+[node name="Main" type="Node2D" unique_id=698631903]
 script = ExtResource("1_6t2ow")
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=564250921]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background" unique_id=928125781]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8392157, 0.8392157, 0.8392157, 1)
+
+[node name="PostProcessing" parent="." unique_id=2064727996 instance=ExtResource("2_eijcj")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1064538032]
+environment = SubResource("Environment_eijcj")

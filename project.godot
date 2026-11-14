@@ -15,6 +15,10 @@ run/main_scene="uid://bab4p2kybglsp"
 config/features=PackedStringArray("4.7")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Services="*uid://b3jqgb7qvmv5s"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=1
