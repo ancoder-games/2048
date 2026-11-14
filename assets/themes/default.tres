@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://b27thx5c4hch2"]
+
+[ext_resource type="FontFile" uid="uid://burmn3lue0ygn" path="res://assets/fonts/m6x11.ttf" id="1_x0tin"]
+
+[resource]
+default_font = ExtResource("1_x0tin")
+default_font_size = 32

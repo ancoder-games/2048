@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cem07vlayo1jy" path="res://src/core/main/main.gd" id="1_6t2ow"]
 [ext_resource type="PackedScene" uid="uid://bo2fs1uqqemtl" path="res://src/gameplay/post_processing/post_processing.tscn" id="2_eijcj"]
+[ext_resource type="Script" uid="uid://cnsdyfvhsfuan" path="res://src/gameplay/camera/camera_service.gd" id="4_5fl30"]
+[ext_resource type="PackedScene" uid="uid://b6ul7v348mnvk" path="res://src/gameplay/2048/board/board.tscn" id="4_yfg2f"]
 
 [sub_resource type="Environment" id="Environment_eijcj"]
 background_mode = 3
@@ -15,8 +17,17 @@ adjustment_enabled = true
 adjustment_brightness = 1.1
 adjustment_contrast = 0.9
 
+[sub_resource type="LabelSettings" id="LabelSettings_eijcj"]
+font_size = 82
+font_color = Color(0.2, 0.2, 0.2, 1)
+
 [node name="Main" type="Node2D" unique_id=698631903]
 script = ExtResource("1_6t2ow")
+
+[node name="PostProcessing" parent="." unique_id=2064727996 instance=ExtResource("2_eijcj")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="PostProcessing" unique_id=1064538032]
+environment = SubResource("Environment_eijcj")
 
 [node name="Background" type="CanvasLayer" parent="." unique_id=564250921]
 layer = -1
@@ -29,7 +40,34 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.8392157, 0.8392157, 0.8392157, 1)
 
-[node name="PostProcessing" parent="." unique_id=2064727996 instance=ExtResource("2_eijcj")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=458845815]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1064538032]
-environment = SubResource("Environment_eijcj")
+[node name="Control" type="Control" parent="UI" unique_id=902442904]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 57.0
+offset_bottom = 57.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="UI/Control" unique_id=760805395]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -179.5
+offset_top = -25.0
+offset_right = 179.5
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "Merge 2048"
+label_settings = SubResource("LabelSettings_eijcj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CameraService" type="Camera2D" parent="." unique_id=2066527734]
+script = ExtResource("4_5fl30")
+metadata/_custom_type_script = "uid://cnsdyfvhsfuan"
+
+[node name="Board" parent="." unique_id=1609651527 instance=ExtResource("4_yfg2f")]

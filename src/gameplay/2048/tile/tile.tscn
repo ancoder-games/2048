@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://ccxy34shwjvac"]
+
+[ext_resource type="Texture2D" uid="uid://811kshj4gue8" path="res://assets/textures/tile.png" id="1_aba2s"]
+[ext_resource type="Script" uid="uid://xjlpssehq22h" path="res://src/gameplay/2048/tile/tile.gd" id="2_wj11w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h45xw"]
+font_size = 38
+font_color = Color(0, 0, 0, 1)
+
+[node name="Tile" type="Sprite2D" unique_id=705134632]
+texture = ExtResource("1_aba2s")
+script = ExtResource("2_wj11w")
+value = null
+
+[node name="Label" type="Label" parent="." unique_id=1568125818]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -29.0
+offset_right = -30.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_h45xw")
+horizontal_alignment = 1
+vertical_alignment = 1

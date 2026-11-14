@@ -36,3 +36,7 @@ window/stretch/aspect="expand"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/log/plugin.cfg")
+
+[gui]
+
+theme/custom="uid://b27thx5c4hch2"

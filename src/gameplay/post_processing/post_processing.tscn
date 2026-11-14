@@ -14,6 +14,7 @@ shader_parameter/mask_strength = 0.150000007125
 [node name="PostProcessing" type="Node" unique_id=2064727996]
 
 [node name="CRT" type="CanvasLayer" parent="." unique_id=2054967978]
+layer = 10
 
 [node name="ColorRect" type="ColorRect" parent="CRT" unique_id=1884034104]
 material = SubResource("ShaderMaterial_77k5f")
