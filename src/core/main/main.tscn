@@ -71,3 +71,4 @@ script = ExtResource("4_5fl30")
 metadata/_custom_type_script = "uid://cnsdyfvhsfuan"
 
 [node name="Board" parent="." unique_id=1609651527 instance=ExtResource("4_yfg2f")]
+scale = Vector2(1.25, 1.25)

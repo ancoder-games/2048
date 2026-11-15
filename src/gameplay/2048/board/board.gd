@@ -3,6 +3,8 @@ class_name Board
 
 const TILE_SIZE: float = 64.0
 
+@onready var camera_service: CameraService = Services.get(CameraService.SERVICE_ID)
+
 var tiles: Array[Tile] = []
 
 var move_debounce: bool = false
@@ -48,10 +50,11 @@ func apply_move(dir: int) -> void:
 					if get_tile(target).move(dir): moves += 1
 
 	move_debounce = true
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.1).timeout
 	move_debounce = false
 	if moves > 0:
 		add_random_tile(2)
+		camera_service.screen_shake(5, 0.05)
 
 func resolve_position(pos: Vector2i) -> Vector2:
 	return (pos * TILE_SIZE) + ((TILE_SIZE / 2) * Vector2i.ONE) - ((TILE_SIZE * 2) * Vector2.ONE)

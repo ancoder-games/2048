@@ -52,7 +52,7 @@ func _tile_pos_updated(do_tween: bool = true) -> void:
 	
 	if do_tween:
 		tween = create_tween()
-		tween.tween_property(self, "position", board.resolve_position(tile_pos), 0.1)
+		tween.tween_property(self, "position", board.resolve_position(tile_pos), 0.1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 		if to_merge:
 			await tween.finished
 			board.remove_tile(self)
