@@ -19,45 +19,48 @@ func _physics_process(_delta: float) -> void:
 	pass
 
 func apply_move(dir: int) -> void:
+	var moves: int = 0
+
 	if move_debounce: return
 	if dir == 0:
 		for y: int in range(3, -1, -1):
 			for x: int in 4:
 				var target: Vector2i = Vector2i(x, y)
 				if not is_tile_empty(target):
-					get_tile(target).move(dir)
+					if get_tile(target).move(dir): moves += 1
 	if dir == 1:
 		for y: int in 4:
 			for x: int in range(3, -1, -1):
 				var target: Vector2i = Vector2i(x, y)
 				if not is_tile_empty(target):
-					get_tile(target).move(dir)
+					if get_tile(target).move(dir): moves += 1
 	if dir == 2:
 		for y: int in 4:
 			for x: int in 4:
 				var target: Vector2i = Vector2i(x, y)
 				if not is_tile_empty(target):
-					get_tile(target).move(dir)
+					if get_tile(target).move(dir): moves += 1
 	if dir == 3:
 		for y: int in 4:
 			for x: int in 4:
 				var target: Vector2i = Vector2i(x, y)
 				if not is_tile_empty(target):
-					get_tile(target).move(dir)
+					if get_tile(target).move(dir): moves += 1
 
 	move_debounce = true
 	await get_tree().create_timer(0.2).timeout
 	move_debounce = false
-	add_random_tile(2)
+	if moves > 0:
+		add_random_tile(2)
 
 func resolve_position(pos: Vector2i) -> Vector2:
 	return (pos * TILE_SIZE) + ((TILE_SIZE / 2) * Vector2i.ONE) - ((TILE_SIZE * 2) * Vector2.ONE)
 
 func is_tile_empty(pos: Vector2i) -> bool:
-	return tiles.filter(func(t: Tile) -> bool: return t.tile_pos == pos).is_empty()
+	return tiles.filter(func(t: Tile) -> bool: return t.tile_pos == pos and !t.to_merge).is_empty()
 
 func get_tile(pos: Vector2i) -> Tile:
-	return tiles.filter(func(t: Tile) -> bool: return t.tile_pos == pos).get(0)
+	return tiles.filter(func(t: Tile) -> bool: return t.tile_pos == pos and !t.to_merge).get(0)
 
 func get_empty_pos() -> Array[Vector2i]:
 	var empty: Array[Vector2i] = []
@@ -69,6 +72,10 @@ func get_empty_pos() -> Array[Vector2i]:
 				empty.append(Vector2i(x, y))
 	
 	return empty
+
+func remove_tile(tile: Tile) -> void:
+	tiles.erase(tile)
+	tile.queue_free.call_deferred()
 
 func add_random_tile(value: int) -> void:
 	var random_pos: Array[Vector2i] = get_empty_pos()

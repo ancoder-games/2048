@@ -25,14 +25,17 @@ const DIRECTIONS: Dictionary[int, Vector2i] = {
 	3: Vector2i(-1, 0), # LEFT
 }
 
-@export var value: int = 0
+@export var value: int = 0:
+	set(new_value): value = new_value; _tile_value_updated()
 @export var tile_pos: Vector2i:
-	set(value): tile_pos = value; _tile_pos_updated()
+	set(new_value): tile_pos = new_value; _tile_pos_updated()
 
 @onready var value_label: Label = %Value
 
 var board: Board
 var tween: Tween
+
+var to_merge: bool = false
 
 static func create(p_tile_pos: Vector2i, p_value: int, p_board: Board) -> Tile:
 	var tile: Tile = SCENE.instantiate()
@@ -50,26 +53,43 @@ func _tile_pos_updated(do_tween: bool = true) -> void:
 	if do_tween:
 		tween = create_tween()
 		tween.tween_property(self, "position", board.resolve_position(tile_pos), 0.1)
+		if to_merge:
+			await tween.finished
+			board.remove_tile(self)
 	else:
 		position = board.resolve_position(tile_pos)
 
-func _ready() -> void:
+func _tile_value_updated() -> void:
+	if not is_node_ready(): return
+
 	if value in COLORS:
 		self_modulate = COLORS[value]
 	else:
 		self_modulate = COLORS[-1]
 	
 	value_label.text = str(value)
-	_tile_pos_updated()
 
-func move(dir: int) -> void:
+func _ready() -> void:
+	_tile_pos_updated()
+	_tile_value_updated()
+
+func move(dir: int) -> bool:
+	var moved: bool = false
+	
 	var new_pos: Vector2i = tile_pos
 	
 	while (dir == 3 and new_pos.x > 0) or (dir == 1 and new_pos.x < 3) or (dir == 2 and new_pos.y > 0) or (dir == 0 and new_pos.y < 3):
 		var target: Vector2i = new_pos + DIRECTIONS[dir]
 		if board.is_tile_empty(target):
+			moved = true
 			new_pos = target
 		else:
+			if board.get_tile(target).value == value:
+				to_merge = true
+				moved = true
+				board.get_tile(target).value *= 2
 			break
 
 	tile_pos = new_pos
+
+	return moved
