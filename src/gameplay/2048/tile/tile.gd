@@ -31,11 +31,13 @@ const DIRECTIONS: Dictionary[int, Vector2i] = {
 	set(new_value): tile_pos = new_value; _tile_pos_updated()
 
 @onready var value_label: Label = %Value
+@onready var anim: AnimationPlayer = %AnimationPlayer
 
 var board: Board
 var tween: Tween
 
 var to_merge: bool = false
+var to_play_merge: bool = false
 
 static func create(p_tile_pos: Vector2i, p_value: int, p_board: Board) -> Tile:
 	var tile: Tile = SCENE.instantiate()
@@ -69,8 +71,12 @@ func _tile_value_updated() -> void:
 	
 	value_label.text = str(value)
 
+	if to_play_merge:
+		anim.play("merge")
+		to_play_merge = false
+
 func _ready() -> void:
-	_tile_pos_updated()
+	_tile_pos_updated(false)
 	_tile_value_updated()
 
 func move(dir: int) -> bool:
@@ -87,6 +93,7 @@ func move(dir: int) -> bool:
 			if board.get_tile(target).value == value:
 				to_merge = true
 				moved = true
+				board.get_tile(target).to_play_merge = true
 				board.get_tile(target).value *= 2
 			break
 

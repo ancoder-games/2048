@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ccxy34shwjvac"]
 
-[ext_resource type="Texture2D" uid="uid://811kshj4gue8" path="res://assets/textures/tile.png" id="1_aba2s"]
+[ext_resource type="Texture2D" uid="uid://bhf3wtunn3e2e" path="res://assets/textures/tile_rounded.png" id="1_pnotm"]
 [ext_resource type="Script" uid="uid://xjlpssehq22h" path="res://src/gameplay/2048/tile/tile.gd" id="2_wj11w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h45xw"]
@@ -19,12 +19,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(1.01, 1.01)]
 }
 
 [sub_resource type="Animation" id="Animation_pnotm"]
 resource_name = "appear"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -35,17 +35,35 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.19999999),
 "transitions": PackedFloat32Array(2, 1),
 "update": 0,
-"values": [Vector2(0.001, 0.001), Vector2(1, 1)]
+"values": [Vector2(0.001, 0.001), Vector2(1.01, 1.01)]
+}
+
+[sub_resource type="Animation" id="Animation_tm5u5"]
+resource_name = "merge"
+length = 0.19999999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(2, 0.5, 1),
+"update": 0,
+"values": [Vector2(1.01, 1.01), Vector2(1.1, 1.1), Vector2(1.01, 1.01)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1k2ii"]
 _data = {
 &"RESET": SubResource("Animation_1k2ii"),
-&"appear": SubResource("Animation_pnotm")
+&"appear": SubResource("Animation_pnotm"),
+&"merge": SubResource("Animation_tm5u5")
 }
 
 [node name="Tile" type="Sprite2D" unique_id=705134632]
-texture = ExtResource("1_aba2s")
+scale = Vector2(1.01, 1.01)
+texture = ExtResource("1_pnotm")
 script = ExtResource("2_wj11w")
 
 [node name="Value" type="Label" parent="." unique_id=1568125818]
@@ -65,5 +83,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=842370339]
+unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_1k2ii")
 autoplay = &"appear"

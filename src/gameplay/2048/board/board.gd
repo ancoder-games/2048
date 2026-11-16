@@ -2,6 +2,7 @@ extends Node2D
 class_name Board
 
 const TILE_SIZE: float = 64.0
+const SEPARATION: float = 5.0
 
 @onready var camera_service: CameraService = Services.get(CameraService.SERVICE_ID)
 
@@ -57,7 +58,8 @@ func apply_move(dir: int) -> void:
 		camera_service.screen_shake(5, 0.05)
 
 func resolve_position(pos: Vector2i) -> Vector2:
-	return (pos * TILE_SIZE) + ((TILE_SIZE / 2) * Vector2i.ONE) - ((TILE_SIZE * 2) * Vector2.ONE)
+	# return (pos * TILE_SIZE) + ((TILE_SIZE / 2) * Vector2i.ONE) - ((TILE_SIZE * 2) * Vector2.ONE)
+	return Vector2(pos * (TILE_SIZE + SEPARATION)) + Vector2.ONE * (TILE_SIZE / 2.0 - (4 * TILE_SIZE + 3 * SEPARATION) / 2.0)
 
 func is_tile_empty(pos: Vector2i) -> bool:
 	return tiles.filter(func(t: Tile) -> bool: return t.tile_pos == pos and !t.to_merge).is_empty()
