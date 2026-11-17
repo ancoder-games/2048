@@ -79,6 +79,19 @@ func _ready() -> void:
 	_tile_pos_updated(false)
 	_tile_value_updated()
 
+func destroy() -> void:
+	anim.play("destroy")
+	await anim.animation_finished
+	board.remove_tile(self)
+
+func can_merge() -> bool:
+	for dir: Vector2i in DIRECTIONS.values():
+		var test_pos: Vector2i = tile_pos + dir
+		if test_pos.x >= 0 and test_pos.x <= 3 and test_pos.y >= 0 and test_pos.y <= 3:
+			if !board.is_tile_empty(test_pos) and board.get_tile(test_pos).value == value:
+				return true
+	return false
+
 func move(dir: int) -> bool:
 	var moved: bool = false
 	
@@ -95,6 +108,7 @@ func move(dir: int) -> bool:
 				moved = true
 				board.get_tile(target).to_play_merge = true
 				board.get_tile(target).value *= 2
+				board.score += board.get_tile(target).value
 			break
 
 	tile_pos = new_pos
