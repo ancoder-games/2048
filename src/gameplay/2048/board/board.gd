@@ -7,6 +7,9 @@ const SEPARATION: float = 5.0
 @onready var camera_service: CameraService = Services.get(CameraService.SERVICE_ID)
 
 @onready var anim: AnimationPlayer = %AnimationPlayer
+
+@onready var slide_effect: AudioStreamPlayer = %SlideEffect
+
 @onready var retry_button: Button = %RetryButton
 @onready var score_label: Label = %ScoreLabel
 @onready var high_score_label: Label = %HighScoreLabel
@@ -91,11 +94,12 @@ func apply_move(dir: int) -> void:
 					if get_tile(target).move(dir): moves += 1
 
 	move_debounce = true
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.05).timeout
 	move_debounce = false
 	if moves > 0:
 		add_random_tile(2)
 		camera_service.screen_shake(5, 0.05)
+		slide_effect.play()
 
 	if check_game_over():
 		game_over = true

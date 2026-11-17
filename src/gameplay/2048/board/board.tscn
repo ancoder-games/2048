@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bhf3wtunn3e2e" path="res://assets/textures/tile_rounded.png" id="3_rmtit"]
 [ext_resource type="FontFile" uid="uid://burmn3lue0ygn" path="res://assets/fonts/m6x11.ttf" id="4_5ttfy"]
 [ext_resource type="Texture2D" uid="uid://c1238ni2vij2s" path="res://assets/textures/reload.svg" id="5_jja56"]
+[ext_resource type="AudioStream" uid="uid://de526mi5ie1xr" path="res://assets/sfx/Minimalist7.wav" id="6_ankeq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pnotm"]
 texture = ExtResource("3_rmtit")
@@ -134,6 +135,11 @@ _data = {
 &"game_over": SubResource("Animation_ankeq"),
 &"retry": SubResource("Animation_xe3on")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jja56"]
+random_pitch = 1.2599211
+streams_count = 1
+stream_0/stream = ExtResource("6_ankeq")
 
 [node name="Board" type="Node2D" unique_id=1609651527]
 script = ExtResource("1_8t0ls")
@@ -368,3 +374,8 @@ unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_xe3on")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=832149438]
+
+[node name="SlideEffect" type="AudioStreamPlayer" parent="." unique_id=407128350]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_jja56")
+pitch_scale = 0.6
