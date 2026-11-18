@@ -15,7 +15,8 @@ const COLORS: Dictionary[int, Color] = {
 	512: Color8(215, 84, 219),
 	1024: Color8(84, 136, 219),
 	2048: Color8(234, 224, 76),
-	-1: Color8(51, 51, 51), # #333333
+	4096: Color8(255, 85, 70),
+	-1: Color8(122, 122, 122),
 }
 
 const DIRECTIONS: Dictionary[int, Vector2i] = {

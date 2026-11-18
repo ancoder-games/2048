@@ -49,9 +49,9 @@ func _on_retry_button_pressed() -> void:
 	for y: int in 4:
 		for x: int in 4:
 			if x == 3:
+				impact_effect.play()
 				await get_tile(Vector2i(x, y)).destroy()
 				camera_service.screen_shake(30, 0.01)
-				impact_effect.play()
 				await get_tree().create_timer(0.1).timeout
 			else:
 				get_tile(Vector2i(x, y)).destroy()
