@@ -4,7 +4,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_77k5f"]
 shader = ExtResource("1_8p82q")
-shader_parameter/curvature = 0.02400000114
+shader_parameter/curvature = 0.01200000057
 shader_parameter/scanlines = 0.150000007125
 shader_parameter/scanline_size = 4.000000095
 shader_parameter/brightness = 1.20000003325
