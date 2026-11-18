@@ -12,7 +12,7 @@ tonemap_exposure = 0.6
 tonemap_white = 1.5
 glow_enabled = true
 glow_intensity = 0.2
-glow_bloom = 0.5
+glow_bloom = 0.6
 adjustment_enabled = true
 adjustment_brightness = 1.1
 adjustment_contrast = 0.9
@@ -70,5 +70,3 @@ metadata/_custom_type_script = "uid://cnsdyfvhsfuan"
 
 [node name="Board" parent="." unique_id=1609651527 instance=ExtResource("4_yfg2f")]
 scale = Vector2(1.4, 1.4)
-
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=140770158]

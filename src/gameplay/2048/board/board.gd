@@ -6,11 +6,15 @@ const SEPARATION: float = 5.0
 
 @onready var camera_service: CameraService = Services.get(CameraService.SERVICE_ID)
 
-@onready var anim: AnimationPlayer = %AnimationPlayer
+@onready var game_over_anim: AnimationPlayer = %GameOverAnim
+@onready var controls_anim: AnimationPlayer = %ControlsAnim
 
 @onready var slide_effect: AudioStreamPlayer = %SlideEffect
+@onready var impact_effect: AudioStreamPlayer = %ImpactEffect
 
 @onready var retry_button: Button = %RetryButton
+@onready var ok_button: Button = %OKButton
+
 @onready var score_label: Label = %ScoreLabel
 @onready var high_score_label: Label = %HighScoreLabel
 
@@ -21,6 +25,7 @@ var score: int = 0:
 var high_score: int = 0
 
 var game_over: bool = false
+var can_retry: bool = false
 
 var move_debounce: bool = false
 
@@ -34,13 +39,22 @@ func _on_score_updated() -> void:
 	high_score_label.text = "Hi Score: %d" % high_score
 
 func _on_retry_button_pressed() -> void:
-	anim.play("retry")
-	await anim.animation_finished
+	if !can_retry: return
+	can_retry = false
+	game_over_anim.play("retry")
+	slide_effect.play()
+	await game_over_anim.animation_finished
 	await get_tree().create_timer(0.2).timeout
 
 	for y: int in 4:
 		for x: int in 4:
-			await get_tile(Vector2i(x, y)).destroy()
+			if x == 3:
+				await get_tile(Vector2i(x, y)).destroy()
+				camera_service.screen_shake(30, 0.01)
+				impact_effect.play()
+				await get_tree().create_timer(0.1).timeout
+			else:
+				get_tile(Vector2i(x, y)).destroy()
 	
 	await get_tree().create_timer(0.4).timeout
 
@@ -48,8 +62,16 @@ func _on_retry_button_pressed() -> void:
 	score = 0
 	game_over = false
 
+func _on_ok_button_pressed() -> void:
+	controls_anim.play("disappear")
+	camera_service.screen_shake(5, 0.05)
+	slide_effect.play()
+
 func _ready() -> void:
 	retry_button.pressed.connect(_on_retry_button_pressed)
+	ok_button.pressed.connect(_on_ok_button_pressed)
+
+	controls_anim.play("appear")
 
 	_on_score_updated()
 	add_random_tile(2)
@@ -103,8 +125,9 @@ func apply_move(dir: int) -> void:
 
 	if check_game_over():
 		game_over = true
+		can_retry = true
 		await get_tree().create_timer(1).timeout
-		anim.play("game_over")
+		game_over_anim.play("game_over")
 
 func resolve_position(pos: Vector2i) -> Vector2:
 	# return (pos * TILE_SIZE) + ((TILE_SIZE / 2) * Vector2i.ONE) - ((TILE_SIZE * 2) * Vector2.ONE)

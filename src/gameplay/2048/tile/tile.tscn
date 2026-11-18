@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://xjlpssehq22h" path="res://src/gameplay/2048/tile/tile.gd" id="2_wj11w"]
 [ext_resource type="AudioStream" uid="uid://duppevevrt5yg" path="res://assets/sfx/pop_1.wav" id="3_1k2ii"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_h45xw"]
-font_size = 38
+[sub_resource type="LabelSettings" id="LabelSettings_1k2ii"]
+font_size = 42
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_1k2ii"]
@@ -65,7 +65,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_w7oaq"]
 resource_name = "destroy"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -93,7 +93,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_tm5u5"]
 resource_name = "merge"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -124,20 +124,23 @@ stream_0/stream = ExtResource("3_1k2ii")
 scale = Vector2(1.01, 1.01)
 texture = ExtResource("1_pnotm")
 script = ExtResource("2_wj11w")
+label_settings = SubResource("LabelSettings_1k2ii")
 
 [node name="Value" type="Label" parent="." unique_id=1568125818]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -30.0
-offset_top = -29.0
-offset_right = -30.0
-offset_bottom = -29.0
+offset_left = -30.69307
+offset_top = -27.722773
+offset_right = -30.69307
+offset_bottom = -27.72277
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 38
 text = "0"
-label_settings = SubResource("LabelSettings_h45xw")
+label_settings = SubResource("LabelSettings_1k2ii")
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -6,6 +6,9 @@
 [ext_resource type="FontFile" uid="uid://burmn3lue0ygn" path="res://assets/fonts/m6x11.ttf" id="4_5ttfy"]
 [ext_resource type="Texture2D" uid="uid://c1238ni2vij2s" path="res://assets/textures/reload.svg" id="5_jja56"]
 [ext_resource type="AudioStream" uid="uid://de526mi5ie1xr" path="res://assets/sfx/Minimalist7.wav" id="6_ankeq"]
+[ext_resource type="AudioStream" uid="uid://uy5rcsxbebhe" path="res://assets/sfx/explosion.wav" id="7_05liv"]
+[ext_resource type="Texture2D" uid="uid://b7oo5gyw15tf3" path="res://assets/textures/tilemap_white.png" id="7_xe3on"]
+[ext_resource type="Texture2D" uid="uid://d74vsu7f0wl8" path="res://assets/textures/tile_dark_rounded.png" id="8_hxcun"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pnotm"]
 texture = ExtResource("3_rmtit")
@@ -75,7 +78,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_ankeq"]
 resource_name = "appear"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -103,7 +106,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_xe3on"]
 resource_name = "retry"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -140,6 +143,139 @@ _data = {
 random_pitch = 1.2599211
 streams_count = 1
 stream_0/stream = ExtResource("6_ankeq")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hfhpw"]
+random_pitch = 1.2599211
+streams_count = 1
+stream_0/stream = ExtResource("7_05liv")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ankeq"]
+texture = ExtResource("3_rmtit")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_0o143"]
+font_size = 32
+font_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ankeq"]
+atlas = ExtResource("7_xe3on")
+region = Rect2(512, 206, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxcun"]
+atlas = ExtResource("7_xe3on")
+region = Rect2(563, 206, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xe3on"]
+atlas = ExtResource("7_xe3on")
+region = Rect2(546, 206, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05liv"]
+atlas = ExtResource("7_xe3on")
+region = Rect2(529, 206, 11, 11)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hxcun"]
+content_margin_left = 0.0
+content_margin_top = 5.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("8_hxcun")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="Animation" id="Animation_hxcun"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset_transform_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_05liv"]
+resource_name = "appear"
+length = 0.19999999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset_transform_scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(0.001, 0.001), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_hfhpw"]
+resource_name = "disappear"
+length = 0.19999999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset_transform_scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.001, 0.001)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hfhpw"]
+_data = {
+&"RESET": SubResource("Animation_hxcun"),
+&"appear": SubResource("Animation_05liv"),
+&"disappear": SubResource("Animation_hfhpw")
+}
 
 [node name="Board" type="Node2D" unique_id=1609651527]
 script = ExtResource("1_8t0ls")
@@ -369,13 +505,125 @@ theme_override_styles/focus = SubResource("StyleBoxTexture_jja56")
 text = "Retry"
 icon = ExtResource("5_jja56")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver" unique_id=867992399]
+[node name="GameOverAnim" type="AnimationPlayer" parent="GameOver" unique_id=867992399]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_xe3on")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=832149438]
 
 [node name="SlideEffect" type="AudioStreamPlayer" parent="." unique_id=407128350]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_jja56")
 pitch_scale = 0.6
+
+[node name="ImpactEffect" type="AudioStreamPlayer" parent="." unique_id=23211735]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_hfhpw")
+volume_db = -30.0
+
+[node name="Controls" type="Panel" parent="." unique_id=1691786672]
+visible = false
+z_index = 100
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.000015
+offset_top = -92.0
+offset_right = 122.000015
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_ankeq")
+
+[node name="ControlsLabel" type="Label" parent="Controls" unique_id=1644586189]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.000008
+offset_top = 17.0
+offset_right = 53.999992
+offset_bottom = 45.0
+grow_horizontal = 2
+text = "Controls"
+label_settings = SubResource("LabelSettings_0o143")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls" unique_id=1712465576]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.000008
+offset_top = -36.0
+offset_right = 51.999992
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Up" type="TextureRect" parent="Controls/VBoxContainer" unique_id=2013695721]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_ankeq")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls/VBoxContainer" unique_id=1060027971]
+layout_mode = 2
+
+[node name="Left" type="TextureRect" parent="Controls/VBoxContainer/HBoxContainer" unique_id=1831234809]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_hxcun")
+
+[node name="Down" type="TextureRect" parent="Controls/VBoxContainer/HBoxContainer" unique_id=873359389]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_xe3on")
+
+[node name="Right" type="TextureRect" parent="Controls/VBoxContainer/HBoxContainer" unique_id=1234437382]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_05liv")
+
+[node name="OKButton" type="Button" parent="Controls" unique_id=1645878443]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -33.000008
+offset_top = -42.0
+offset_right = 32.999992
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.7279856, 0.7279857, 0.7279856, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.3470683, 0.3470683, 0.3470683, 1)
+theme_override_constants/h_separation = 8
+theme_override_constants/icon_max_width = 24
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxTexture_hxcun")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_hxcun")
+theme_override_styles/hover = SubResource("StyleBoxTexture_hxcun")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_hxcun")
+theme_override_styles/focus = SubResource("StyleBoxTexture_hxcun")
+text = "OK"
+
+[node name="ControlsAnim" type="AnimationPlayer" parent="Controls" unique_id=1321438204]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_hfhpw")

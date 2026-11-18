@@ -14,7 +14,7 @@ const COLORS: Dictionary[int, Color] = {
 	256: Color8(84, 219, 123),
 	512: Color8(215, 84, 219),
 	1024: Color8(84, 136, 219),
-	2048: Color8(219, 210, 84),
+	2048: Color8(234, 224, 76),
 	-1: Color8(51, 51, 51), # #333333
 }
 
@@ -29,6 +29,7 @@ const DIRECTIONS: Dictionary[int, Vector2i] = {
 	set(new_value): value = new_value; _tile_value_updated()
 @export var tile_pos: Vector2i:
 	set(new_value): tile_pos = new_value; _tile_pos_updated()
+@export var label_settings: LabelSettings
 
 @onready var value_label: Label = %Value
 @onready var anim: AnimationPlayer = %AnimationPlayer
@@ -70,12 +71,15 @@ func _tile_value_updated() -> void:
 		self_modulate = COLORS[-1]
 	
 	value_label.text = str(value)
+	if value > 512:
+		value_label.label_settings.font_size = 32
 
 	if to_play_merge:
 		anim.play("merge")
 		to_play_merge = false
 
 func _ready() -> void:
+	value_label.label_settings = label_settings.duplicate()
 	_tile_pos_updated(false)
 	_tile_value_updated()
 
