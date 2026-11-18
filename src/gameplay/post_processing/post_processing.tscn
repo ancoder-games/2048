@@ -13,6 +13,18 @@ shader_parameter/mask_strength = 0.150000007125
 
 [node name="PostProcessing" type="Node" unique_id=2064727996]
 
+[node name="Glow" type="CanvasLayer" parent="." unique_id=1628711366]
+layer = 11
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Glow" unique_id=99198762]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="CRT" type="CanvasLayer" parent="." unique_id=2054967978]
 layer = 10
 
