@@ -116,18 +116,20 @@ func apply_move(dir: int) -> void:
 					if get_tile(target).move(dir): moves += 1
 
 	move_debounce = true
-	await get_tree().create_timer(0.05).timeout
-	move_debounce = false
+
 	if moves > 0:
+		slide_effect.play()
 		add_random_tile(2)
 		camera_service.screen_shake(5, 0.05)
-		slide_effect.play()
 
 	if check_game_over():
 		game_over = true
 		can_retry = true
 		await get_tree().create_timer(1).timeout
 		game_over_anim.play("game_over")
+
+	await get_tree().create_timer(0.05).timeout
+	move_debounce = false
 
 func resolve_position(pos: Vector2i) -> Vector2:
 	# return (pos * TILE_SIZE) + ((TILE_SIZE / 2) * Vector2i.ONE) - ((TILE_SIZE * 2) * Vector2.ONE)
