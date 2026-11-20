@@ -15,7 +15,7 @@ glow_intensity = 0.6
 glow_bloom = 0.6
 adjustment_enabled = true
 adjustment_brightness = 1.1
-adjustment_contrast = 0.7
+adjustment_contrast = 0.8
 
 [sub_resource type="LabelSettings" id="LabelSettings_eijcj"]
 font_size = 82
@@ -59,7 +59,7 @@ offset_top = -25.0
 offset_right = 179.5
 offset_bottom = 48.0
 grow_horizontal = 2
-text = "Merge 2048"
+text = "Merge 4096"
 label_settings = SubResource("LabelSettings_eijcj")
 horizontal_alignment = 1
 vertical_alignment = 1
